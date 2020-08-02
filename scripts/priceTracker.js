@@ -10,12 +10,6 @@ const GATEWAY = 'messaging.sprintpcs.com';
 // interval of time to check all PRODUCTS
 const INTERVAL_TIMER = 60 * 60000 + parseInt(Math.random() * 60000);
 
-// array of product objects:
-// name: String
-// url: String
-// lowPrice: Float
-const PRODUCTS = JSON.parse(fs.readFileSync('products.json')).products;
-
 // text notifications
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -90,11 +84,19 @@ async function asyncForEach(array, callback) {
     try {
       // init browser
       const browser = await puppeteer.launch({
-        headless: false,
+        product: 'chrome',
+	executablePath: '/usr/bin/chromium-browser',
         ignoreHTTPSErrors: true,
       });
       const page = await browser.newPage();
       page.setDefaultTimeout(30000);
+
+      //init PRODUCTS array
+      // array of product objects:
+      // name: String
+      // url: String
+      // lowPrice: Float
+      const PRODUCTS = JSON.parse(fs.readFileSync('products.json')).products;
 
       // iterate through PRODUCTS array, find deals for each product
       await asyncForEach(PRODUCTS, async (product) => {
@@ -138,6 +140,7 @@ async function asyncForEach(array, callback) {
         await new Promise((resolve) => setTimeout(resolve, 18000));
       });
       browser.close();
+      console.log('Tracking Session complete')
       await new Promise((resolve) => setTimeout(resolve, INTERVAL_TIMER));
     } catch (err) {
       console.log(err);
