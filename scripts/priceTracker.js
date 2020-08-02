@@ -58,7 +58,7 @@ async function findDeals(product, page) {
 
     // iterate through items, add to dealArray when under price threshold (lowPrice)
     itemArray.forEach((item) => {
-      let currPrice = parseFloat(item.querySelector('.s-item__price').innerText.split('$')[1]);
+      let currPrice = parseFloat(item.querySelector('.s-item__price').innerText.replace('$', '').replace(',', ''));
       if (typeof currPrice === 'number' && currPrice <= product.lowPrice) {
         let url = item.querySelector('.s-item__info.clearfix > a')['href'];
         dealArray.push({ url, currPrice });
@@ -85,7 +85,7 @@ async function asyncForEach(array, callback) {
       // init browser
       const browser = await puppeteer.launch({
         product: 'chrome',
-	executablePath: '/usr/bin/chromium-browser',
+        executablePath: '/usr/bin/chromium-browser',
         ignoreHTTPSErrors: true,
       });
       const page = await browser.newPage();
@@ -140,7 +140,7 @@ async function asyncForEach(array, callback) {
         await new Promise((resolve) => setTimeout(resolve, 18000));
       });
       browser.close();
-      console.log('Tracking Session complete')
+      console.log('Tracking Session complete');
       await new Promise((resolve) => setTimeout(resolve, INTERVAL_TIMER));
     } catch (err) {
       console.log(err);
