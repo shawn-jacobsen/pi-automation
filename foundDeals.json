@@ -1,3 +1,16 @@
 {
-  "deals": []
+  "deals": [
+    {
+      "url": "https://www.ebay.com/itm/Sigma-16mm-f-1-4-DC-DN-Contemporary-Lens-for-Sony-E-Mount-Cameras/283933951345?hash=item421bc84571%3Ag%3Aik4AAOSw2QZe%7EOQc&LH_BIN=1",
+      "price": 349.95
+    },
+    {
+      "url": "https://www.ebay.com/itm/ZOTAC-Gaming-GeForce-RTX-2070-SUPER-Twin-Fan-Graphics-Card-Open-Box/383577644925?hash=item594f025f7d%3Ag%3AZFkAAOSwl-tefR-b&LH_BIN=1&LH_ItemCondition=1000%7C1500",
+      "price": 479.99
+    },
+    {
+      "url": "https://www.ebay.com/itm/ZOTAC-Gaming-GeForce-RTX-2070-SUPER-Mini-Graphics-Card/264795171689?epid=15036087340&hash=item3da705ab69%3Ag%3AqFcAAOSwCFxeTjPx&LH_BIN=1&LH_ItemCondition=1000%7C1500",
+      "price": 479.99
+    }
+  ]
 }

@@ -3,7 +3,22 @@
     {
       "name": "Sigma 16mm F/1.4 E Mount Lens",
       "url": "https://www.ebay.com/sch/i.html?_from=R40&_nkw=sigma+16mm+1.4+e+mount&_sacat=0&LH_TitleDesc=0&LH_BIN=1&_sop=15",
-      "lowPrice": 310
+      "lowPrice": 315
+    },
+    {
+      "name": "RTX 2070 Super",
+      "url": "https://www.ebay.com/sch/i.html?_from=R40&_nkw=2070+super&_sacat=0&LH_TitleDesc=0&_udlo=300&_sop=15&LH_BIN=1&LH_ItemCondition=1000%7C1500&rt=nc",
+      "lowPrice": 420
+    },
+    {
+      "name": "Sony FE 16-35mm f/2.8 GM",
+      "url": "https://www.ebay.com/sch/i.html?_from=R40&_nkw=Sony+FE+16-35mm+f%2F2.8+GM&_sacat=0&LH_BIN=1&_sop=15&rt=nc&LH_ItemCondition=1000%7C1500",
+      "lowPrice": 1750
+    },
+    {
+      "name": "Sony FE 24mm f/1.4 GM",
+      "url": "https://www.ebay.com/sch/i.html?_from=R40&_nkw=Sony+FE+24mm+f%2F1.4+GM&_sacat=0&LH_TitleDesc=0&_sop=15&LH_BIN=1&LH_ItemCondition=1000%7C1500&rt=nc",
+      "lowPrice": 1200
     }
   ]
 }
