@@ -1,6 +1,6 @@
 #!/bin/bash
 for file in ./scripts/*.js;
 do
-  node $file &
+ nohup node $file &
 done
 wait
