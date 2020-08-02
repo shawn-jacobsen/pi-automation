@@ -23,8 +23,11 @@ let mailOptions = {
   from: gmail_creds.email,
   to: `${PHONE_NUMBER}@${GATEWAY}`,
   subject: '',
-  text: '',
+  text: 'Started priceTracker',
 };
+
+// notify that script has been started
+transporter.sendMail(mailOptions);
 
 // notification txt
 // item: object w url, currPrice
