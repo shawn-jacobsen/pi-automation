@@ -143,7 +143,10 @@ async function asyncForEach(array, callback) {
         await new Promise((resolve) => setTimeout(resolve, 18000));
       });
       browser.close();
+      // notify session is complete
       console.log('Tracking Session complete');
+      mailOptions.text = 'Tracking session complete';
+      await transporter.sendMail(mailOptions);
       await new Promise((resolve) => setTimeout(resolve, INTERVAL_TIMER));
     } catch (err) {
       console.log(err);
