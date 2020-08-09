@@ -92,7 +92,7 @@ async function asyncForEach(array, callback) {
         ignoreHTTPSErrors: true,
       });
       const page = await browser.newPage();
-      page.setDefaultTimeout(30000);
+      page.setDefaultNavigationTimeout(0);
 
       //init PRODUCTS array
       // array of product objects:
