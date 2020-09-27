@@ -7,8 +7,8 @@ const fs = require('fs');
 const PHONE_NUMBER = 6143701557;
 const GATEWAY = 'messaging.sprintpcs.com';
 
-// interval of time to check all PRODUCTS
-const INTERVAL_TIMER = 60 * 60000 + parseInt(Math.random() * 60000);
+// interval of time to deviate checking all PRODUCTS
+const RAND_TIMER = parseInt(Math.random() * 60000); // RANGE (0,1) minutes
 
 // text notifications
 var transporter = nodemailer.createTransport({
@@ -82,74 +82,71 @@ async function asyncForEach(array, callback) {
 
 // check all products every set INTERVAL_TIMER
 (async () => {
-  while (true) {
-    console.log('checking for deals...');
-    try {
-      // init browser
-      const browser = await puppeteer.launch({
-        product: 'chrome',
-        executablePath: '/usr/bin/chromium-browser',
-        ignoreHTTPSErrors: true,
-      });
-      const page = await browser.newPage();
-      page.setDefaultTimeout(30000);
+  console.log('checking for deals...');
+  try {
+    // init browser
+    const browser = await puppeteer.launch({
+      product: 'chrome',
+      executablePath: '/usr/bin/chromium-browser',
+      ignoreHTTPSErrors: true,
+    });
+    const page = await browser.newPage();
+    page.setDefaultTimeout(30000);
 
-      //init PRODUCTS array
-      // array of product objects:
-      // name: String
-      // url: String
-      // lowPrice: Float
-      const PRODUCTS = JSON.parse(fs.readFileSync('products.json')).products;
+    //init PRODUCTS array
+    // array of product objects:
+    // name: String
+    // url: String
+    // lowPrice: Float
+    const PRODUCTS = JSON.parse(fs.readFileSync('products.json')).products;
+    // iterate through PRODUCTS array, find deals for each product
+    await asyncForEach(PRODUCTS, async (product) => {
+      // find deals on the product page
+      let dealArray = await findDeals(product, page);
 
-      // iterate through PRODUCTS array, find deals for each product
-      await asyncForEach(PRODUCTS, async (product) => {
-        // find deals on the product page
-        let dealArray = await findDeals(product, page);
-
-        // load previously found deals
-        let previouslyFoundDeals = JSON.parse(fs.readFileSync('foundDeals.json'));
-        // if not previously found or found at cheaper price, send notification and add to previouslyFoundDeals
-        await asyncForEach(dealArray, async (deal) => {
-          // look if previously found
-          let isNewDeal = true;
-          let isBetterDeal = false;
-          await asyncForEach(previouslyFoundDeals.deals, async (prevDeal) => {
-            // if same product
-            if (prevDeal.url === deal.url) {
-              isNewDeal = false;
-              // flag as better better deal if new price is lower
-              if (prevDeal.price > deal.currPrice) {
-                isBetterDeal = true;
-                prevDeal.price = deal.currPrice;
-              }
+      // load previously found deals
+      let previouslyFoundDeals = JSON.parse(fs.readFileSync('foundDeals.json'));
+      // if not previously found or found at cheaper price, send notification and add to previouslyFoundDeals
+      await asyncForEach(dealArray, async (deal) => {
+        // look if previously found
+        let isNewDeal = true;
+        let isBetterDeal = false;
+        await asyncForEach(previouslyFoundDeals.deals, async (prevDeal) => {
+          // if same product
+          if (prevDeal.url === deal.url) {
+            isNewDeal = false;
+            // flag as better better deal if new price is lower
+            if (prevDeal.price > deal.currPrice) {
+              isBetterDeal = true;
+              prevDeal.price = deal.currPrice;
             }
-          });
-
-          // found a new deal
-          if (isNewDeal) {
-            console.log('Found new deal!');
-            previouslyFoundDeals.deals.push({ url: deal.url, price: deal.currPrice });
-            await SendNotification(deal, product, 'NEW DEAL');
-          }
-          // found at better price
-          if (isBetterDeal) {
-            console.log('Found better deal!');
-            await SendNotification(deal, product, 'UPDATED DEAL');
           }
         });
-        // resave the updated previouslyFoundDeals JSON object
-        fs.writeFileSync('foundDeals.json', JSON.stringify(previouslyFoundDeals, null, 2));
-        // wait between each fetch
-        await new Promise((resolve) => setTimeout(resolve, 18000));
+
+        // found a new deal
+        if (isNewDeal) {
+          console.log('Found new deal!');
+          previouslyFoundDeals.deals.push({ url: deal.url, price: deal.currPrice });
+          await SendNotification(deal, product, 'NEW DEAL');
+        }
+        // found at better price
+        if (isBetterDeal) {
+          console.log('Found better deal!');
+          await SendNotification(deal, product, 'UPDATED DEAL');
+        }
       });
-      browser.close();
-      // notify session is complete
-      console.log('Tracking Session complete');
-      mailOptions.text = 'Tracking session complete';
-      await transporter.sendMail(mailOptions);
-      await new Promise((resolve) => setTimeout(resolve, INTERVAL_TIMER));
-    } catch (err) {
-      console.log(err);
-    }
+      // resave the updated previouslyFoundDeals JSON object
+      fs.writeFileSync('foundDeals.json', JSON.stringify(previouslyFoundDeals, null, 2));
+      // wait between each fetch
+      await new Promise((resolve) => setTimeout(resolve, 18000));
+    });
+    browser.close();
+    // notify session is complete
+    console.log('Tracking Session complete');
+    mailOptions.text = 'Tracking session complete';
+    await transporter.sendMail(mailOptions);
+    await new Promise((resolve) => setTimeout(resolve, INTERVAL_TIMER));
+  } catch (err) {
+    console.log(err);
   }
 })();
