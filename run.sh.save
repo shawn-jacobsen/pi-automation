@@ -1,0 +1,7 @@
+#!/bin/bash
+for file in       mailOptions.text = 'Tracking session complete';
+      await transporter.sendMail(mailOptions);~Documents/pi-automation/scripts/*.js;
+do
+ nohup node $file &
+done
+wait
