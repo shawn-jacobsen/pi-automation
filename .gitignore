@@ -1,3 +1,5 @@
 node_modules
 email_secret.json
 env
+notionAutomation/secrets.py
+.ENV

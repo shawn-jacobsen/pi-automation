@@ -5,11 +5,8 @@ from termcolor import colored
 from datetime import *
 from pathlib import Path
 
+from secrets import *
 from updateClassesHelpers import *
-
-CARMEN_USER_ID = '85970000000559345'
-ACCESS_TOKEN_CARMEN = '8597~GRZXEV3PCyWaB3wKt0jg4VagALMaou6dH4OTdNj8Dt7ZwRZWEdsXmdQ5kibiFgTP'
-NOTION_TOKEN_V2 = 'f094e1add62286410015e39598e998de317fa5fc36538874548034d560cfe596acb01f6c0e12813ec59afbb9ddb11694034668acf23ce3568d1c2c45148975d8e23a76e0abcab7a64321f38a0155'
 
 # load json class data
 OSU_CLASSES_DATA_PATH = (Path(__file__).parent / '../osuClasses.json').resolve()
@@ -22,9 +19,6 @@ CLASS_INFO_URL = f"https://canvas.instructure.com/api/v1/courses?enrollment_stat
 # endpoint to access assignment information
 # replace <class_id> with access token for use
 CLASS_COURSES_URL = f"https://canvas.instructure.com/api/v1/courses/<class_id>/assignments?per_page=100&include=submission&access_token={ACCESS_TOKEN_CARMEN}"
-
-# notion assignment database url
-ASSIGNMENT_DATABASE = 'https://www.notion.so/shawnpersonal/37adf54ce56947f7bce06da37a451b5d?v=1bdae244cd674966b2dbc9bafd16a5cb'
 
 # setup Notion session
 notion_client = getNotionClient(NOTION_TOKEN_V2)
