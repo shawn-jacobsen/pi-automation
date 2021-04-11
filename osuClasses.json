@@ -1,0 +1,36 @@
+{
+  "class_Data":
+  [
+  {
+    "semester":"sp21",
+    "enrollment_term_id":"85970000000000158",
+    "classes": [
+      {
+        "name": "SP21 BUSFIN 3220 - Business Finance (3993)",
+        "notion_name": "BUSFIN 3220",
+        "id":"85970000000092688"
+      },
+      {
+        "name": "SP21 CSE 2331 - Fndns 2: DS & Alg (11079)",
+        "notion_name": "FNDS II 2331",
+        "id":"85970000000099262"
+      },
+      {
+        "name": "SP21 CSE 2421 - Sys 1: Comput Org (8470)",
+        "notion_name": "SYSTEMS I 2421",
+        "id":"85970000000097140"
+      },
+      {
+        "name": "SP21 MATH 3345 - Fdn Higher Math (28722)",
+        "notion_name": "MATH 3345",
+        "id":"85970000000096314"
+      },
+      {
+        "name": "SP21 PHILOS 1338 - Comp Ethics & Pres (23566)",
+        "notion_name": "PHILOS 1338",
+        "id":"85970000000099687"
+      }
+    ]
+  }
+]
+}

@@ -3,7 +3,14 @@
     {
       "name": "Sigma 16mm F/1.4 E Mount Lens",
       "url": "https://www.ebay.com/sch/i.html?_from=R40&_nkw=sigma+16mm+1.4+e+mount&_sacat=0&LH_TitleDesc=0&LH_BIN=1&_sop=15",
-      "lowPrice": 315
+      "lowPrice": 315,
+      "deals": [
+        {
+          "url":"https://www.ebay.com/itm/Sigma-16mm-f-1-4-DC-DN-Contemporary-Lens-for-Sony-E-Mount-Cameras/283933951345?hash=item421bc84571%3Ag%3Aik4AAOSw2QZe%7EOQc&LH_BIN=1",
+          "price": 349.95,
+          "date": 01-01-2021
+        }
+      ]
     },
     {
       "name": "RTX 2070 Super",
