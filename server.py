@@ -6,8 +6,8 @@ from pyNotifications import (
 )
 
 # read in email json data
-#with open('email_secret.json') as f:
-#    EMAIL_DATA = json.load(f)
+with open('email_secret.json') as f:
+    EMAIL_DATA = json.load(f)  
 
 # Notification data for sending text message
 #PORT = 587  # For starttls
