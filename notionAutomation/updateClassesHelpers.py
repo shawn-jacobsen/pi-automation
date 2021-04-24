@@ -17,6 +17,7 @@ def getNotionClient(token):
 # get correct instructure endpoint for assignmnet submission given the provided canvas api url
 def getAssignmentLink(API_link):
   INSTRUCTURE_ENDPOINT = "https://osu.instructure.com/"
+  API_link = API_link.split('assignments/')[0] + 'assignments/' + API_link.split('~')[1]
   return API_link.replace("https://canvas.instructure.com/",INSTRUCTURE_ENDPOINT)
 
 # determines the correct assignment type given various assignment data
