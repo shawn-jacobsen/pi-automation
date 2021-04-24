@@ -5,8 +5,9 @@ from pyNotifications import (
   sendEmail
 )
 
+# read in email json data
 with open('email_secret.json') as f:
-  EMAIL_DATA = json.load(f)
+    EMAIL_DATA = json.load(f)
 
 # Notification data for sending text message
 PORT = 587  # For starttls
@@ -17,10 +18,6 @@ SENDER_PSW = EMAIL_DATA['password']
 RECEIVER_EMAIL = "shawn.jacobsen0@gmail.com"
 
 # sendEmail(PORT, SMTP_SERVER, SENDER_EMAIL, SENDER_PSW, RECEIVER_EMAIL, text)
-
-# read in email json data
-with open('email_secret.json') as f:
-    EMAIL_DATA = json.load(f)
 
 app = Flask(__name__)
 
