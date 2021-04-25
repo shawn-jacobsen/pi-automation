@@ -38,8 +38,8 @@ def welcome():
 def print_data():
     text = f"values:\r\n{request.values}\r\n\r\nForm:\r\n{request.form}\r\n\r\nJSON:\r\n{request.json}"
     print(text)
-    sendEmail(PORT, SMTP_SERVER, SENDER_EMAIL, SENDER_PSW, RECEIVER_EMAIL, text)
-    return "Received!"
+    rval = sendEmail(PORT, SMTP_SERVER, SENDER_EMAIL, SENDER_PSW, RECEIVER_EMAIL, text)
+    return rval
 
 if __name__ == "__main__":
     app.run(debug=True)
