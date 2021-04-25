@@ -32,14 +32,15 @@ app = Flask(__name__)
 
 @app.route('/api/')
 def welcome():
-    return "Welcome to Shawn's personal API!"
+    rval = f"Welcome to Shawn's personal API!\nSENDER_EMAIL: {SENDER_EMAIL}\nSENDER_PSW: {SENDER_PSW}"
+    return rval
 
 @app.route('/api/sleep-data', methods=['POST'])
 def print_data():
     text = f"values:\r\n{request.values}\r\n\r\nForm:\r\n{request.form}\r\n\r\nJSON:\r\n{request.json}"
     print(text)
     rval = sendEmail(PORT, SMTP_SERVER, SENDER_EMAIL, SENDER_PSW, RECEIVER_EMAIL, text)
-    return rval
+    return f"{'Success!' if rval else 'something went wrong...'}"
 
 if __name__ == "__main__":
     app.run(debug=True)
