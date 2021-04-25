@@ -46,7 +46,7 @@ def sendEmail(app, text):
   except Exception as err:
     print("ERROR: Cannot send email")
     print(err)
-    rval = False
+    return f"{err}"
 
   return rval
   
