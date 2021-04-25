@@ -32,7 +32,7 @@ app = Flask(__name__)
 
 @app.route('/api/')
 def welcome():
-    rval = f"Welcome to Shawn's personal API!\nSENDER_EMAIL: {SENDER_EMAIL}\nSENDER_PSW: {SENDER_PSW}"
+    rval = f"Welcome to Shawn's personal API!\r\nSENDER_EMAIL: {SENDER_EMAIL}\r\nSENDER_PSW: {SENDER_PSW}"
     return rval
 
 @app.route('/api/sleep-data', methods=['POST'])
