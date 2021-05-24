@@ -5,14 +5,16 @@ from termcolor import colored
 from datetime import *
 from pathlib import Path
 
-from updateClassesHelpers import (
-  addRowToNotionDB,
-  getNotionClient,
+from notionAutomation.notionHelpers import (
+  addAssignmentToNotionDB,
+)
+
+from notionAutomation.updateClassesHelpers import (
   getAssignmentLink,
   getAssignmentType
 )
 
-def updateClasses(ASSIGNMENT_DATABASE_URL, CARMEN_USER_ID, ACCESS_TOKEN_CARMEN, NOTION_TOKEN_V2):
+def updateNotionClasses(NOTION_ASSIGNMENT_DB_ID, CARMEN_USER_ID, CARMEN_SECRET, NOTION_DOODLEBOT_SECRET):
   # load json class data
   OSU_CLASSES_DATA_PATH = (Path(__file__).parent / '../osuClasses.json').resolve()
   with open(OSU_CLASSES_DATA_PATH) as f:
@@ -25,9 +27,6 @@ def updateClasses(ASSIGNMENT_DATABASE_URL, CARMEN_USER_ID, ACCESS_TOKEN_CARMEN, 
   # replace <class_id> with access token for use
   CLASS_COURSES_URL = f"https://canvas.instructure.com/api/v1/courses/<class_id>/assignments?per_page=100&include=submission&access_token={ACCESS_TOKEN_CARMEN}"
 
-  # setup Notion session
-  notion_client = getNotionClient(NOTION_TOKEN_V2)
-
   # assignment collection view
   assignment_cv = notion_client.get_collection_view(ASSIGNMENT_DATABASE_URL)
 
@@ -38,7 +37,7 @@ def updateClasses(ASSIGNMENT_DATABASE_URL, CARMEN_USER_ID, ACCESS_TOKEN_CARMEN, 
     print(colored(f"ID:   {class_info['id']}",'magenta'))
     print('--------------')
 
-    assignment_endpt = CLASS_COURSES_URL.replace('<class_id>', class_info['id']).replace('<token>', ACCESS_TOKEN_CARMEN)
+    assignment_endpt = CLASS_COURSES_URL.replace('<class_id>', class_info['id']).replace('<token>', CARMEN_SECRET)
     response = requests.get(assignment_endpt)
     if response:
       assignments_info = response.json()
@@ -82,7 +81,7 @@ def updateClasses(ASSIGNMENT_DATABASE_URL, CARMEN_USER_ID, ACCESS_TOKEN_CARMEN, 
           
           try:
             row = assignment_cv.collection.add_row()
-            addRowToNotionDB(row, class_info, assignment, isCompleteByCarmen, assignment_due_local, hasDueDate)
+            addAssignmentToNotionDB(row, class_info, assignment, isCompleteByCarmen, assignment_due_local, hasDueDate)
           except Exception as e:
             print(colored(f"ERROR: cannot add to Notion DB", "red"))
             print(str(e))

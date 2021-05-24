@@ -3,21 +3,10 @@ import json
 from flask import Flask
 from flask_mail import Mail, Message
 
-# RECEIVER_EMAIL = "6143701557@messaging.sprintpcs.com"
-RECEIVER_EMAIL = "shawn.jacobsen0@gmail.com"
-SENDER_EMAIL = ""
-SENDER_PSW = ""
+RECEIVER_EMAIL = "6143701557@messaging.sprintpcs.com"
 # get env vars
-if os.environ.get('IS_PROD', None):
-    SENDER_EMAIL = os.environ.get('SENDER_EMAIL')
-    SENDER_PSW = os.environ.get('SENDER_PSW')
-else:
-    print("\nWelcome to DEVELOPMENT MODE....")
-    # read in email json data
-    with open('email_secret.json') as f:
-      EMAIL_DATA = json.load(f)
-    SENDER_EMAIL = EMAIL_DATA['email']
-    SENDER_PSW = EMAIL_DATA['password']
+SENDER_EMAIL = os.environ.get('SENDER_EMAIL')
+SENDER_PSW = os.environ.get('SENDER_PSW')
 
 def sendEmail(app, text):
   rval = True # true if success, false if not

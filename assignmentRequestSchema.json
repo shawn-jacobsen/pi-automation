@@ -1,0 +1,55 @@
+{
+	"parent": { "database_id": "37adf54ce56947f7bce06da37a451b5d" },
+	"properties": {
+		"Assignment": {
+			"title": [
+				{
+					"text": {
+						"content": "TEST Assignment"
+					}
+				}
+			]
+		},
+    "Category":{
+      "select": {
+        "name": "Other"
+      }
+    },
+    "Quick Notes":{
+			"rich_text": [
+				{
+					"text": {
+						"content": "Quick Notes"
+					}
+				}
+			]
+    },
+    "Progress":{
+      "select": {
+        "name": "Incomplete"
+      }
+    },
+    "canvasId":{
+			"rich_text": [
+				{
+					"text": {
+						"content": "1289045728905"
+					}
+				}
+			]
+    },
+    "Do Today":{
+      "checkbox": true
+    },
+    "Due Date":{
+      "date": {
+        "start": "2021-05-17T18:30:00-04:00"
+      }
+    },
+    "Class":{
+      "select": {
+        "name": "Workato"
+      }
+    }
+	}
+}

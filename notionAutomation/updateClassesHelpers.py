@@ -1,18 +1,3 @@
-from notion.client import NotionClient
-
-# add row data  to Notion DB given Notion row object
-def addRowToNotionDB(row, class_info, assignment, isCompleteByCarmen, assignment_due_local, hasDueDate):
-  row.Class = class_info["notion_name"]
-  row.assignment = assignment["name"]
-  row.progress = "Complete" if isCompleteByCarmen else "Incomplete"
-  row.due_date = assignment_due_local if hasDueDate else ""
-  row.type = getAssignmentType(assignment["name"], assignment["submission_types"])
-  row.submission = getAssignmentLink(assignment["html_url"])
-  row.canvasId = str(assignment['id'])
-
-# returns a notion client given token_v2 from browser session
-def getNotionClient(token):
-  return NotionClient(token_v2=token)
 
 # get correct instructure endpoint for assignmnet submission given the provided canvas api url
 def getAssignmentLink(API_link):

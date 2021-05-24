@@ -3,3 +3,4 @@ email_secret.json
 env
 notionAutomation/secrets.py
 .ENV
+notionAutomation/.ENV
